@@ -58,10 +58,16 @@ function Options() {
                         InputProps={{
                             inputProps: {
                                 min: 0,
-                                max: 12
+                                max: 8
                             }
                         }}
-                        onChange={(e) => { setRow(+e?.target.value) }}
+                        sx={{
+                            "& .MuiInputLabel-root.Mui-focused": { color: 'black' },
+                            "& .MuiOutlinedInput-root.Mui-focused": {
+                                "& > fieldset": { borderColor: "black" }
+                            }
+                        }}
+                        onChange={(e) => { setRow(+e?.target.value < 9 && +e?.target.value > 0 ? +e?.target.value : 0) }}
                     />
                     <TextField
                         required
@@ -74,7 +80,13 @@ function Options() {
                                 max: 12
                             }
                         }}
-                        onChange={(e) => { setColumn(+e?.target.value) }}
+                        sx={{
+                            "& .MuiInputLabel-root.Mui-focused": { color: 'black' },
+                            "& .MuiOutlinedInput-root.Mui-focused": {
+                                "& > fieldset": { borderColor: "black" }
+                            }
+                        }}
+                        onChange={(e) => { setColumn(+e?.target.value < 13 && +e?.target.value > 0 ? +e?.target.value : 0) }}
                     />
                 </Typography>
             </Drawer>

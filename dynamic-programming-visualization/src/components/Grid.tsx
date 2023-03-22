@@ -7,16 +7,25 @@ const Grid = ({ rows, columns }) => {
             key={columnIndex}
             style={{
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
             }}
         >
             {Array.from({ length: rows }, (_, rowIndex) => (
                 <div
                     key={`${columnIndex}-${rowIndex}`}
                     style={{
-                        width: '30px',
-                        height: '30px',
-                        border: '1px solid black'
+                        width: '50px',
+                        height: '50px',
+                        border: '1px solid #000',
+                        borderTopWidth: rowIndex === 0 ? '3px' : '1px',
+                        borderBottomWidth: rowIndex === rows - 1 ? '3px' : '1px',
+                        borderLeftWidth: columnIndex === 0 ? '3px' : '1px',
+                        borderRightWidth: columnIndex === columns - 1 ? '3px' : '1px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '1.2rem',
+                        fontWeight: 'bold'
                     }}
                 />
             ))}
@@ -26,8 +35,11 @@ const Grid = ({ rows, columns }) => {
     return <div
         className="grid"
         style={{
+            position: 'absolute',
             display: 'flex',
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            bottom: '8em',
+            left: '20em'
         }}>
         {grid}
     </div>;
