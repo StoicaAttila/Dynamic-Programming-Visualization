@@ -1,20 +1,22 @@
-import { Divider, Drawer, lighten, TextField, Toolbar, Typography } from "@mui/material"
+import { Button, Divider, Drawer, lighten, Toolbar, Typography } from "@mui/material"
 import React from "react"
 // @ts-ignore
-import Grid from "../Grid.tsx"
+import visualizeMinCostPath from "../solutions/MinCostPath.tsx";
 
 function Options() {
 
-    const [row, setRow] = React.useState(0)
-    const [column, setColumn] = React.useState(0)
+    // const matrix: number[][] = [
+    //     [1, 2, 3],
+    //     [4, 8, 2],
+    //     [1, 5, 3]
+    // ];
 
-    React.useEffect(() => {
-
-    }, [row, column])
+    function handleMinCostPath() {
+        return visualizeMinCostPath()
+    }
 
     return (
         <>
-            <Grid rows={row} columns={column} />
             <Drawer
                 variant="permanent"
                 anchor="right"
@@ -42,52 +44,23 @@ function Options() {
                     flexDirection="column"
                     sx={{
                         margin: "1em",
-                        pointerEvents: "none",
                         '& .MuiTextField-root': {
                             margin: "0.5em",
                             pointerEvents: "auto",
                         }
                     }}
                 >
-                    Select grid size:
-                    <TextField
-                        required
-                        label="Row"
-                        variant="outlined"
-                        type="number"
-                        InputProps={{
-                            inputProps: {
-                                min: 0,
-                                max: 8
-                            }
-                        }}
+                    Select problem:
+                    <Button
                         sx={{
-                            "& .MuiInputLabel-root.Mui-focused": { color: 'black' },
-                            "& .MuiOutlinedInput-root.Mui-focused": {
-                                "& > fieldset": { borderColor: "black" }
-                            }
+                            bgcolor: 'transparent',
+                            color: 'black',
+                            border: '1px solid black',
                         }}
-                        onChange={(e) => { setRow(+e?.target.value < 9 && +e?.target.value > 0 ? +e?.target.value : 0) }}
-                    />
-                    <TextField
-                        required
-                        label="Column"
-                        variant="outlined"
-                        type="number"
-                        InputProps={{
-                            inputProps: {
-                                min: 0,
-                                max: 12
-                            }
-                        }}
-                        sx={{
-                            "& .MuiInputLabel-root.Mui-focused": { color: 'black' },
-                            "& .MuiOutlinedInput-root.Mui-focused": {
-                                "& > fieldset": { borderColor: "black" }
-                            }
-                        }}
-                        onChange={(e) => { setColumn(+e?.target.value < 13 && +e?.target.value > 0 ? +e?.target.value : 0) }}
-                    />
+                        onClick={handleMinCostPath}
+                    >
+                        Minimum cost path
+                    </Button>
                 </Typography>
             </Drawer>
         </>

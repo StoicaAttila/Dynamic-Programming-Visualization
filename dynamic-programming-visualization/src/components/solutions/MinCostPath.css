@@ -1,0 +1,24 @@
+table {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    /* center the table */
+    width: 50%;
+    /* make the table 80% of the screen width */
+    height: 100%;
+}
+
+td {
+    border: 5px solid black;
+    padding: 15px;
+    /* increase the cell padding */
+    text-align: center;
+    /* center the cell contents */
+    font-size: 50px;
+    /* increase the font size */
+}
+
+td.min-cost-path {
+    background-color: green;
+}
