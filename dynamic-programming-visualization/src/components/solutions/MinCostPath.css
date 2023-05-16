@@ -22,3 +22,7 @@ td {
 td.min-cost-path {
     background-color: green;
 }
+
+td.search-path {
+    background-color: yellow;
+}

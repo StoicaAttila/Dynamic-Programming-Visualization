@@ -16,6 +16,25 @@ async function findMinCostPath(): Promise<number> {
         matrix.push(row);
     }
 
+    // Create the table
+    const table = document.createElement("table");
+    for (let i = 0; i < m; i++) {
+        const row = document.createElement("tr");
+        for (let j = 0; j < n; j++) {
+            const cell = document.createElement("td");
+            cell.textContent = matrix[i][j].toString();
+            // if (path.some(([x, y]) => x === i && y === j)) {
+            //     cell.classList.add("min-cost-path");
+            //     //await new Promise((resolve) => setTimeout(resolve, 500));
+            // }
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
+    }
+
+    // Add the table to the document
+    document.body.appendChild(table);
+
     // Initialize the dp array with the first row and column
     const dp: number[][] = [];
     dp[0] = [matrix[0][0]];
@@ -37,39 +56,40 @@ async function findMinCostPath(): Promise<number> {
     const minCost = dp[m - 1][n - 1];
     const path: [number, number][] = [[m - 1, n - 1]];
     let i = m - 1, j = n - 1;
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    table.rows[i].cells[j].classList.add("min-cost-path");
     while (i > 0 || j > 0) {
         if (i === 0) {
+            await new Promise((resolve) => setTimeout(resolve, 3000));
+            table.rows[i].cells[j - 1].classList.add("search-path");
             j--;
         } else if (j === 0) {
+            await new Promise((resolve) => setTimeout(resolve, 3000));
+            table.rows[i - 1].cells[j].classList.add("search-path");
             i--;
         } else {
             if (dp[i - 1][j] < dp[i][j - 1]) {
+                await new Promise((resolve) => setTimeout(resolve, 3000));
+                table.rows[i - 1].cells[j].classList.add("search-path");
+                table.rows[i].cells[j - 1].classList.add("search-path");
                 i--;
             } else {
+                await new Promise((resolve) => setTimeout(resolve, 3000));
+                table.rows[i - 1].cells[j].classList.add("search-path");
+                table.rows[i].cells[j - 1].classList.add("search-path");
                 j--;
             }
         }
-        path.unshift([i, j]);
-    }
-
-    // Create the table
-    const table = document.createElement("table");
-    for (let i = 0; i < m; i++) {
-        const row = document.createElement("tr");
-        for (let j = 0; j < n; j++) {
-            const cell = document.createElement("td");
-            cell.textContent = matrix[i][j].toString();
-            if (path.some(([x, y]) => x === i && y === j)) {
-                cell.classList.add("min-cost-path");
-                //await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+        for (let k1 = 0; k1 < m; k1++) {
+            for (let k2 = 0; k2 < n; k2++) {
+                table.rows[k1].cells[k2].classList.remove("search-path")
             }
-            row.appendChild(cell);
         }
-        table.appendChild(row);
+        path.unshift([i, j]);
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+        table.rows[i].cells[j].classList.add("min-cost-path");
     }
-
-    // Add the table to the document
-    document.body.appendChild(table);
 
     // Return the minimum cost path
     return minCost;
