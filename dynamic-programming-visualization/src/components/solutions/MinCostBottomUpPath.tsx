@@ -1,6 +1,6 @@
 import "./MinMaxCostPath.css"
 
-async function findMinCostPath(delay: number): Promise<number> {
+async function findMinCostBottomUpPath(delay: number): Promise<number> {
     // Get user input for the matrix size
     const m = parseInt(prompt("Enter number of rows:")!);
     const n = parseInt(prompt("Enter number of columns:")!);
@@ -105,4 +105,4 @@ async function findMinCostPath(delay: number): Promise<number> {
     return minCost;
 }
 
-export default findMinCostPath;
+export default findMinCostBottomUpPath;
