@@ -1,6 +1,6 @@
 import "./MinMaxCostPath.css"
 
-async function findMinCostPath(): Promise<number> {
+async function findMaxCostPath(): Promise<number> {
     // Get user input for the matrix size
     const m = parseInt(prompt("Enter number of rows:")!);
     const n = parseInt(prompt("Enter number of columns:")!);
@@ -44,12 +44,12 @@ async function findMinCostPath(): Promise<number> {
     // Fill up the dp array using the recurrence relation
     for (let i = 1; i < m; i++) {
         for (let j = 1; j < n; j++) {
-            dp[i][j] = matrix[i][j] + Math.min(dp[i - 1][j], dp[i][j - 1]);
+            dp[i][j] = matrix[i][j] + Math.max(dp[i - 1][j], dp[i][j - 1]);
         }
     }
 
-    // Find the minimum cost path
-    const minCost = dp[m - 1][n - 1];
+    // Find the maximum cost path
+    const maxCost = dp[m - 1][n - 1];
     const path: [number, number][] = [[m - 1, n - 1]];
     let i = m - 1, j = n - 1;
     await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -64,7 +64,7 @@ async function findMinCostPath(): Promise<number> {
             table.rows[i - 1].cells[j].classList.add("search-path");
             i--;
         } else {
-            if (dp[i - 1][j] < dp[i][j - 1]) {
+            if (dp[i - 1][j] > dp[i][j - 1]) {
                 await new Promise((resolve) => setTimeout(resolve, 3000));
                 table.rows[i - 1].cells[j].classList.add("search-path");
                 table.rows[i].cells[j - 1].classList.add("search-path");
@@ -88,7 +88,7 @@ async function findMinCostPath(): Promise<number> {
     }
 
     // Return the minimum cost path
-    return minCost;
+    return maxCost;
 }
 
-export default findMinCostPath;
+export default findMaxCostPath;

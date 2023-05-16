@@ -2,6 +2,8 @@ import { Button, Divider, Drawer, lighten, Toolbar, Typography } from "@mui/mate
 import React from "react"
 // @ts-ignore
 import visualizeMinCostPath from "../solutions/MinCostPath.tsx";
+// @ts-ignore
+import visualizeMaxCostPath from "../solutions/MaxCostPath.tsx";
 
 function Options() {
 
@@ -13,6 +15,10 @@ function Options() {
 
     function handleMinCostPath() {
         return visualizeMinCostPath()
+    }
+
+    function handleMaxCostPath() {
+        return visualizeMaxCostPath()
     }
 
     return (
@@ -56,10 +62,22 @@ function Options() {
                             bgcolor: 'transparent',
                             color: 'black',
                             border: '1px solid black',
+                            marginBottom: '5px'
                         }}
                         onClick={handleMinCostPath}
                     >
                         Minimum cost path
+                    </Button>
+                    <Button
+                        sx={{
+                            bgcolor: 'transparent',
+                            color: 'black',
+                            border: '1px solid black',
+                            marginBottom: '5px'
+                        }}
+                        onClick={handleMaxCostPath}
+                    >
+                        Maximum cost path
                     </Button>
                 </Typography>
             </Drawer>
