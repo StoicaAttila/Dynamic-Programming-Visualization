@@ -27,7 +27,7 @@ td {
     /* increase the font size */
 }
 
-td.min-cost-path {
+td.final-cost-path {
     background-color: green;
 }
 

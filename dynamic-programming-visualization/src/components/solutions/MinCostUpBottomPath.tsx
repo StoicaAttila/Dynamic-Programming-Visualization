@@ -67,7 +67,7 @@ async function findMinCostUpBottomPath(delay: number): Promise<number> {
     const minCost = dp[i][j];
     const path: [number, number][] = [[i, j]];
     await new Promise((resolve) => setTimeout(resolve, delay));
-    table.rows[i].cells[j].classList.add("min-cost-path");
+    table.rows[i].cells[j].classList.add("final-cost-path");
     while (i < m || j < n) {
         if (i === m - 1) {
             await new Promise((resolve) => setTimeout(resolve, delay));
@@ -98,7 +98,7 @@ async function findMinCostUpBottomPath(delay: number): Promise<number> {
         }
         path.unshift([i, j]);
         await new Promise((resolve) => setTimeout(resolve, 300));
-        table.rows[i].cells[j].classList.add("min-cost-path");
+        table.rows[i].cells[j].classList.add("final-cost-path");
     }
 
     // Return the minimum cost path
