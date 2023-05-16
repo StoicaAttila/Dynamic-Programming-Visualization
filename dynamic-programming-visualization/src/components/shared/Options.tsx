@@ -1,4 +1,4 @@
-import { Button, Divider, Drawer, lighten, Toolbar, Typography } from "@mui/material"
+import { Button, Divider, Drawer, lighten, TextField, Toolbar, Typography } from "@mui/material"
 import React from "react"
 // @ts-ignore
 import visualizeMinCostPath from "../solutions/MinCostPath.tsx";
@@ -13,12 +13,14 @@ function Options() {
     //     [1, 5, 3]
     // ];
 
+    const [speed, setSpeed] = React.useState(0)
+
     function handleMinCostPath() {
-        return visualizeMinCostPath()
+        return visualizeMinCostPath(speed * 1000)
     }
 
     function handleMaxCostPath() {
-        return visualizeMaxCostPath()
+        return visualizeMaxCostPath(speed * 1000)
     }
 
     return (
@@ -56,8 +58,24 @@ function Options() {
                         }
                     }}
                 >
+                    Select speed:
+                    <TextField
+                        required
+                        label="Speed (sec)"
+                        variant="outlined"
+                        type="number"
+                        sx={{
+                            "& .MuiInputLabel-root.Mui-focused": { color: 'black' },
+                            "& .MuiOutlinedInput-root.Mui-focused": {
+                                "& > fieldset": { borderColor: "black" }
+                            },
+                            marginBottom: '5px'
+                        }}
+                        onChange={(e) => { setSpeed(+e?.target.value) }}
+                    />
                     Select problem:
                     <Button
+                        disabled={speed > 0 ? false : true}
                         sx={{
                             bgcolor: 'transparent',
                             color: 'black',
@@ -69,6 +87,7 @@ function Options() {
                         Minimum cost path
                     </Button>
                     <Button
+                        disabled={speed > 0 ? false : true}
                         sx={{
                             bgcolor: 'transparent',
                             color: 'black',

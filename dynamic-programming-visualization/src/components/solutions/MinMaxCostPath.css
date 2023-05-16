@@ -9,6 +9,14 @@ table {
     height: 100%;
 }
 
+button {
+    font-size: medium;
+    padding: "10px 20px";
+    border-radius: 5px;
+    background-color: white;
+    margin-top: 10px;
+}
+
 td {
     border: 5px solid black;
     padding: 15px;
