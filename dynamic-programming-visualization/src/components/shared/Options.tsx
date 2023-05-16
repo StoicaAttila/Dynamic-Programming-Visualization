@@ -6,6 +6,8 @@ import visualizeMinCostBottomUpPath from "../solutions/MinCostBottomUpPath.tsx";
 import visualizeMinCostUpBottomPath from "../solutions/MinCostUpBottomPath.tsx";
 // @ts-ignore
 import visualizeMaxCostBottomUpPath from "../solutions/MaxCostBottomUpPath.tsx";
+// @ts-ignore
+import visualizeMaxCostUpBottomPath from "../solutions/MaxCostUpBottomPath.tsx";
 
 function Options() {
 
@@ -27,6 +29,10 @@ function Options() {
 
     function handleMaxCostBottomUpPath() {
         return visualizeMaxCostBottomUpPath(speed * 1000)
+    }
+
+    function handleMaxCostUpBottomPath() {
+        return visualizeMaxCostUpBottomPath(speed * 1000)
     }
 
     return (
@@ -115,6 +121,18 @@ function Options() {
                         onClick={handleMaxCostBottomUpPath}
                     >
                         Maximum cost path bottom-up
+                    </Button>
+                    <Button
+                        disabled={speed > 0 ? false : true}
+                        sx={{
+                            bgcolor: 'transparent',
+                            color: 'black',
+                            border: '1px solid black',
+                            marginBottom: '5px'
+                        }}
+                        onClick={handleMaxCostUpBottomPath}
+                    >
+                        Maximum cost path up-bottom
                     </Button>
                 </Typography>
             </Drawer>
