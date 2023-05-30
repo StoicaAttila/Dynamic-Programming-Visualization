@@ -34,3 +34,12 @@ td.final-cost-path {
 td.search-path {
     background-color: yellow;
 }
+
+td.current-path {
+    background-color: orange;
+}
+
+span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+}
