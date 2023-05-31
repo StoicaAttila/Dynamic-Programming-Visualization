@@ -16,6 +16,10 @@ async function findMinCostBottomUpPath(delay: number): Promise<number> {
         matrix.push(row);
     }
 
+    //Create container
+    const container = document.createElement("div");
+    container.style.display = "flex";
+
     // Create the table
     const table = document.createElement("table");
     for (let i = 0; i < m; i++) {
@@ -30,6 +34,7 @@ async function findMinCostBottomUpPath(delay: number): Promise<number> {
 
     // Create the tableDP
     const tableDP = document.createElement("table");
+    tableDP.classList.add("tableDP");
     for (let i = 0; i < m; i++) {
         const rowDP = document.createElement("tr");
         for (let j = 0; j < n; j++) {
@@ -53,11 +58,12 @@ async function findMinCostBottomUpPath(delay: number): Promise<number> {
     refreshButton.addEventListener("mouseout", function () {
         refreshButton.style.backgroundColor = "white";
     });
-    tableDP.appendChild(refreshButton);
+    table.appendChild(refreshButton);
 
-    // Add the table to the document
-    document.body.appendChild(table);
-    document.body.appendChild(tableDP);
+    // Add the tables to the document
+    container.appendChild(table);
+    container.appendChild(tableDP);
+    document.body.appendChild(container);
 
     // Initialize the dp array with the first row and column
     const dp: number[][] = [];
