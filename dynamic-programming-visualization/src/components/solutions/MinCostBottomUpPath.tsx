@@ -2,17 +2,22 @@ import "./MinMaxCostPath.css"
 
 async function findMinCostBottomUpPath(delay: number): Promise<number> {
     // Get user input for the matrix size
-    const m = parseInt(prompt("Enter number of rows:")!);
-    const n = parseInt(prompt("Enter number of columns:")!);
+    const sizeInput = prompt("Enter the number of rows and columns, separated by a space:")!;
+    const [m, n] = sizeInput.split(" ").map(Number);
 
     // Get user input for the matrix values
     const matrix: number[][] = [];
     for (let i = 0; i < m; i++) {
         const row: number[] = [];
+
+        const rowValues = prompt(`Enter the values for row ${i + 1}, separated by spaces:`)!;
+        const values = rowValues.split(" ");
+
         for (let j = 0; j < n; j++) {
-            const value = parseInt(prompt(`Enter value for row ${i + 1} column ${j + 1}:`)!);
+            const value = parseInt(values[j]);
             row.push(value);
         }
+
         matrix.push(row);
     }
 
