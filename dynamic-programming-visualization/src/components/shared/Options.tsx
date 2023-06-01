@@ -4,6 +4,8 @@ import React from "react"
 import visualizeMinCostPath from "../solutions/MinCostPath.tsx";
 // @ts-ignore
 import visualizeMaxCostPath from "../solutions/MaxCostPath.tsx";
+// @ts-ignore
+import visualizeFibonacci from "../solutions/Fibonacci.tsx";
 
 function Options() {
 
@@ -21,6 +23,10 @@ function Options() {
 
     function handleMaxCostPath() {
         return visualizeMaxCostPath(speed * 1000)
+    }
+
+    function handleFibonacci() {
+        visualizeFibonacci(speed * 1000)
     }
 
     return (
@@ -97,6 +103,18 @@ function Options() {
                         onClick={handleMaxCostPath}
                     >
                         Maximum cost path
+                    </Button>
+                    <Button
+                        disabled={speed > 0 ? false : true}
+                        sx={{
+                            bgcolor: 'transparent',
+                            color: 'black',
+                            border: '1px solid black',
+                            marginBottom: '5px'
+                        }}
+                        onClick={handleFibonacci}
+                    >
+                        Fibonacci
                     </Button>
                 </Typography>
             </Drawer>
