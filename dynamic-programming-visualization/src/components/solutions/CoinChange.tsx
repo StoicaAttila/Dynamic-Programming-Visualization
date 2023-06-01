@@ -29,8 +29,25 @@ async function countCoinChange(delay: number): Promise<number> {
 
     // Create the tableDP
     const tableDP = document.createElement("table");
+
+    // Create the first row for indexes
+    const indexRow = document.createElement("tr");
+    indexRow.appendChild(document.createElement("th")); // empty cell for the top-left corner
+    for (let j = 0; j <= target; j++) {
+        const indexCell = document.createElement("th");
+        indexCell.textContent = j.toString();
+        indexRow.appendChild(indexCell);
+    }
+    tableDP.appendChild(indexRow);
+
     for (let i = 0; i <= coins.length; i++) {
         const rowDP = document.createElement("tr");
+
+        // Create the first column for row indexes
+        const indexCell = document.createElement("th");
+        indexCell.textContent = i.toString();
+        rowDP.appendChild(indexCell);
+
         for (let j = 0; j <= target; j++) {
             const cellDP = document.createElement("td");
             cellDP.textContent = "-";
@@ -75,20 +92,21 @@ async function countCoinChange(delay: number): Promise<number> {
 
     // Initialize the dp array with base cases
     const dp: number[][] = [];
-    dp[0] = Array(target + 1).fill(0);
-    for (let i = 0; i <= target; i++) {
+    dp[1] = Array(target + 2).fill(0);
+    for (let i = 1; i <= target + 1; i++) {
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        tableDP.rows[0].cells[i].textContent = "0";
-        tableDP.rows[0].cells[i].classList.add("final");
+        tableDP.rows[1].cells[i].textContent = "0";
+        tableDP.rows[1].cells[i].classList.add("final");
     }
     // Fill up the dp array using the dynamic programming approach
-    for (let i = 1; i <= coins.length; i++) {
-        dp[i] = [1];
+    for (let i = 2; i <= coins.length + 1; i++) {
+        dp[i] = [i];
+        dp[i][1] = 1;
         await new Promise((resolve) => setTimeout(resolve, delay));
-        tableDP.rows[i].cells[0].textContent = "1";
-        tableDP.rows[i].cells[0].classList.add("final");
+        tableDP.rows[i].cells[1].textContent = "1";
+        tableDP.rows[i].cells[1].classList.add("final");
 
-        for (let j = 1; j <= target; j++) {
+        for (let j = 2; j <= target + 1; j++) {
             dp[i][j] = dp[i - 1][j];
             await new Promise((resolve) => setTimeout(resolve, delay));
             tableDP.rows[i].cells[j].classList.add("current");
@@ -99,23 +117,26 @@ async function countCoinChange(delay: number): Promise<number> {
             tableDP.rows[i].cells[j].textContent = dp[i][j].toString();
 
             await new Promise((resolve) => setTimeout(resolve, delay));
-            calculationBox.textContent = ` If ${j.toString()}(column) >= ${coins[i - 1].toString()}`
-            table.rows[0].cells[i - 1].classList.add("search");
-            if (j >= coins[i - 1]) {
+            calculationBox.textContent = ` If ${(j - 1).toString()} >= ${coins[i - 2].toString()}`
+            table.rows[0].cells[i - 2].classList.add("search");
+            tableDP.rows[0].cells[j].classList.add("search");
+            if (j - 1 >= coins[i - 2]) {
                 let temp = dp[i][j];
-                dp[i][j] += dp[i][j - coins[i - 1]];
+                dp[i][j] += dp[i][j - coins[i - 2]];
                 await new Promise((resolve) => setTimeout(resolve, delay));
-                table.rows[0].cells[i - 1].classList.remove("search");
-                tableDP.rows[i].cells[j - coins[i - 1]].classList.add("search");
-                calculationBox.textContent = ` TRUE => ${temp.toString()} + ${dp[i][j - coins[i - 1]].toString()}`;
+                table.rows[0].cells[i - 2].classList.remove("search");
+                tableDP.rows[0].cells[j].classList.remove("search");
+                tableDP.rows[i].cells[j - coins[i - 2]].classList.add("search");
+                calculationBox.textContent = ` TRUE => ${temp.toString()} + ${dp[i][j - coins[i - 2]].toString()}`;
                 await new Promise((resolve) => setTimeout(resolve, delay));
-                tableDP.rows[i].cells[j - coins[i - 1]].classList.remove("search");
+                tableDP.rows[i].cells[j - coins[i - 2]].classList.remove("search");
                 tableDP.rows[i].cells[j].textContent = dp[i][j].toString()
             }
             else {
                 await new Promise((resolve) => setTimeout(resolve, delay));
                 calculationBox.textContent = " FALSE";
-                table.rows[0].cells[i - 1].classList.remove("search");
+                table.rows[0].cells[i - 2].classList.remove("search");
+                tableDP.rows[0].cells[j].classList.remove("search");
             }
 
             await new Promise((resolve) => setTimeout(resolve, delay));
@@ -126,7 +147,7 @@ async function countCoinChange(delay: number): Promise<number> {
     }
 
     // Find the number of ways to make change for the target amount
-    const ways = dp[coins.length][target];
+    const ways = dp[coins.length + 1][target + 1];
 
     // Return the number of ways
     calculationBox.textContent = `The number of ways to make change for the target(${target.toString()}) amount: ${ways.toString()}`

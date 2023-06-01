@@ -53,11 +53,20 @@ td {
     font-size: 50px;
 }
 
+th {
+    text-align: center;
+    font-size: 25px;
+}
+
 td.final {
     background-color: green;
 }
 
 td.search {
+    background-color: yellow;
+}
+
+th.search {
     background-color: yellow;
 }
 
