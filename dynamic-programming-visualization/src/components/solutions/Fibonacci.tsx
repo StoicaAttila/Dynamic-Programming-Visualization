@@ -1,4 +1,4 @@
-import "./MinMaxCostPath.css"
+import "./problems.css"
 
 async function fibonacci(delay: number) {
     // Get user input for sequence limit
@@ -65,24 +65,24 @@ async function fibonacci(delay: number) {
     dp[1] = 1;
     table.rows[0].cells[0].textContent = dp[0].toString();
     table.rows[0].cells[1].textContent = dp[1].toString();
-    table.rows[0].cells[0].classList.add("final-cost-path");
-    table.rows[0].cells[1].classList.add("final-cost-path");
+    table.rows[0].cells[0].classList.add("final");
+    table.rows[0].cells[1].classList.add("final");
 
     for (let i = 2; i < limit; i++) {
         // Calculate the i-th Fibonacci number
         dp[i] = dp[i - 1] + dp[i - 2];
         await new Promise((resolve) => setTimeout(resolve, delay));
-        table.rows[0].cells[i].classList.add("current-path");
-        table.rows[0].cells[i - 1].classList.add("search-path");
-        table.rows[0].cells[i - 2].classList.add("search-path");
+        table.rows[0].cells[i].classList.add("current");
+        table.rows[0].cells[i - 1].classList.add("search");
+        table.rows[0].cells[i - 2].classList.add("search");
         calculationBox.textContent = `${dp[i - 2].toString()} + ${dp[i - 1].toString()}`;
 
         await new Promise((resolve) => setTimeout(resolve, delay));
         table.rows[0].cells[i].textContent = dp[i].toString();
-        table.rows[0].cells[i].classList.remove("current-path");
-        table.rows[0].cells[i].classList.add("final-cost-path");
-        table.rows[0].cells[i - 1].classList.remove("search-path");
-        table.rows[0].cells[i - 2].classList.remove("search-path");
+        table.rows[0].cells[i].classList.remove("current");
+        table.rows[0].cells[i].classList.add("final");
+        table.rows[0].cells[i - 1].classList.remove("search");
+        table.rows[0].cells[i - 2].classList.remove("search");
     }
 
     calculationBox.textContent = `The ${limit.toString()}. fibonacci number is: ${dp[limit - 1].toString()}`;

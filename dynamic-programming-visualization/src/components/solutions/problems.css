@@ -49,22 +49,19 @@ p {
 td {
     border: 5px solid black;
     padding: 15px;
-    /* increase the cell padding */
     text-align: center;
-    /* center the cell contents */
     font-size: 50px;
-    /* increase the font size */
 }
 
-td.final-cost-path {
+td.final {
     background-color: green;
 }
 
-td.search-path {
+td.search {
     background-color: yellow;
 }
 
-td.current-path {
+td.current {
     background-color: orange;
 }
 
