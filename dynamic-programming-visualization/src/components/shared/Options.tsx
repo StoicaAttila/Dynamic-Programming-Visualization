@@ -6,6 +6,8 @@ import visualizeMinCostPath from "../solutions/MinCostPath.tsx";
 import visualizeMaxCostPath from "../solutions/MaxCostPath.tsx";
 // @ts-ignore
 import visualizeFibonacci from "../solutions/Fibonacci.tsx";
+// @ts-ignore
+import visualizeCatalan from "../solutions/Catalan.tsx";
 
 function Options() {
 
@@ -27,6 +29,10 @@ function Options() {
 
     function handleFibonacci() {
         visualizeFibonacci(speed * 1000)
+    }
+
+    function handleCatalan() {
+        visualizeCatalan(speed * 1000)
     }
 
     return (
@@ -115,6 +121,18 @@ function Options() {
                         onClick={handleFibonacci}
                     >
                         Fibonacci
+                    </Button>
+                    <Button
+                        disabled={speed > 0 ? false : true}
+                        sx={{
+                            bgcolor: 'transparent',
+                            color: 'black',
+                            border: '1px solid black',
+                            marginBottom: '5px'
+                        }}
+                        onClick={handleCatalan}
+                    >
+                        Catalan
                     </Button>
                 </Typography>
             </Drawer>
