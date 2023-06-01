@@ -1,13 +1,9 @@
 import { Button, Divider, Drawer, lighten, TextField, Toolbar, Typography } from "@mui/material"
 import React from "react"
 // @ts-ignore
-import visualizeMinCostBottomUpPath from "../solutions/MinCostBottomUpPath.tsx";
+import visualizeMinCostPath from "../solutions/MinCostPath.tsx";
 // @ts-ignore
-import visualizeMinCostUpBottomPath from "../solutions/MinCostUpBottomPath.tsx";
-// @ts-ignore
-import visualizeMaxCostBottomUpPath from "../solutions/MaxCostBottomUpPath.tsx";
-// @ts-ignore
-import visualizeMaxCostUpBottomPath from "../solutions/MaxCostUpBottomPath.tsx";
+import visualizeMaxCostPath from "../solutions/MaxCostPath.tsx";
 
 function Options() {
 
@@ -19,20 +15,12 @@ function Options() {
 
     const [speed, setSpeed] = React.useState(0)
 
-    function handleMinCostBottomUpPath() {
-        return visualizeMinCostBottomUpPath(speed * 1000)
+    function handleMinCostPath() {
+        return visualizeMinCostPath(speed * 1000)
     }
 
-    function handleMinCostUpBottomPath() {
-        return visualizeMinCostUpBottomPath(speed * 1000)
-    }
-
-    function handleMaxCostBottomUpPath() {
-        return visualizeMaxCostBottomUpPath(speed * 1000)
-    }
-
-    function handleMaxCostUpBottomPath() {
-        return visualizeMaxCostUpBottomPath(speed * 1000)
+    function handleMaxCostPath() {
+        return visualizeMaxCostPath(speed * 1000)
     }
 
     return (
@@ -94,9 +82,9 @@ function Options() {
                             border: '1px solid black',
                             marginBottom: '5px'
                         }}
-                        onClick={handleMinCostBottomUpPath}
+                        onClick={handleMinCostPath}
                     >
-                        Minimum cost path bottom-up
+                        Minimum cost path
                     </Button>
                     <Button
                         disabled={speed > 0 ? false : true}
@@ -106,33 +94,9 @@ function Options() {
                             border: '1px solid black',
                             marginBottom: '5px'
                         }}
-                        onClick={handleMinCostUpBottomPath}
+                        onClick={handleMaxCostPath}
                     >
-                        Minimum cost path up-bottom
-                    </Button>
-                    <Button
-                        disabled={speed > 0 ? false : true}
-                        sx={{
-                            bgcolor: 'transparent',
-                            color: 'black',
-                            border: '1px solid black',
-                            marginBottom: '5px'
-                        }}
-                        onClick={handleMaxCostBottomUpPath}
-                    >
-                        Maximum cost path bottom-up
-                    </Button>
-                    <Button
-                        disabled={speed > 0 ? false : true}
-                        sx={{
-                            bgcolor: 'transparent',
-                            color: 'black',
-                            border: '1px solid black',
-                            marginBottom: '5px'
-                        }}
-                        onClick={handleMaxCostUpBottomPath}
-                    >
-                        Maximum cost path up-bottom
+                        Maximum cost path
                     </Button>
                 </Typography>
             </Drawer>
