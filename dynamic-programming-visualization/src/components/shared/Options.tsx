@@ -8,6 +8,8 @@ import visualizeMaxCostPath from "../solutions/MaxCostPath.tsx";
 import visualizeFibonacci from "../solutions/Fibonacci.tsx";
 // @ts-ignore
 import visualizeCatalan from "../solutions/Catalan.tsx";
+// @ts-ignore
+import visualizeCoinChange from "../solutions/CoinChange.tsx";
 
 function Options() {
 
@@ -33,6 +35,10 @@ function Options() {
 
     function handleCatalan() {
         visualizeCatalan(speed * 1000)
+    }
+
+    function handleCoinChange() {
+        return visualizeCoinChange(speed * 1000)
     }
 
     return (
@@ -133,6 +139,18 @@ function Options() {
                         onClick={handleCatalan}
                     >
                         Catalan
+                    </Button>
+                    <Button
+                        disabled={speed > 0 ? false : true}
+                        sx={{
+                            bgcolor: 'transparent',
+                            color: 'black',
+                            border: '1px solid black',
+                            marginBottom: '5px'
+                        }}
+                        onClick={handleCoinChange}
+                    >
+                        Coin change
                     </Button>
                 </Typography>
             </Drawer>
